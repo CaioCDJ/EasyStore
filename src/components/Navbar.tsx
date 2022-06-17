@@ -1,52 +1,55 @@
-import styled from "styled-components";
-import { UserCircle } from "@styled-icons/heroicons-outline/UserCircle";
-
-//estiizacao na navbar
-export const Nav = styled.nav`
-  background-color: #243b67;
-  display: flex;
-  width: 100%;
-  height: 150px;
-  justify-content: space-between;
-`;
-
-export const Img = styled.img`
-  width: 100px;
-  height: 100px;
-`;
-
-const Input = styled.input`
-  display: flex;
-  width: 300px;
-  height: 40px;
-  border-radius: 5px;
-  outline: none;
-`;
-
-export const Icon = styled(UserCircle)`
-  width: 30px;
-  height: 30px;
-  color: #fff;
-`;
+import {
+  Nav,
+  theme,
+  ButtonSearch,
+  UserCirc,
+  DivCircle,
+  CartShopping,
+} from "../styles/navHome";
+import { Search } from "@styled-icons/evil/Search";
+import { ThemeProvider } from "styled-components";
+import Link from "next/link";
 
 export default function NavBar() {
   return (
-    <div className="w-full h-full">
-      <Nav className="">
-        <a href="#">
-          <Img src="img/logoE.png" />
-        </a>
-        <div className="w-screen flex justify-center items-center">
-          <Input type="text" />
-        </div>
-        <Icon />
-      </Nav>
-      <ul>
-        <li>Cadastre</li>
-        <li>Cadastre</li>
-        <li>Cadastre</li>
-      </ul>
-      ;
-    </div>
+    <ThemeProvider theme={theme}>
+      <header className="w-full h-full">
+        <form>
+          <Nav theme={theme}>
+            <div className="flex justify-center items-center w-full">
+              <a href="#">
+                <img src="img/EasyStore.png" />
+                <p>EasyStore </p>
+              </a>
+              <input
+                type="text"
+                placeholder="Buscar produtos, marcas e muito mais…"
+              />
+              <ButtonSearch>
+                <Search
+                  size={"30px"}
+                  className="bg-#EBEBEB rounded-xl mr-1 z-20 relative"
+                />
+              </ButtonSearch>
+              <DivCircle>
+                <span className="rounded-full p-1 border drop-shadow-lg">
+                  <UserCirc theme={theme} />
+                </span>
+                <div>
+                  <a href="#">
+                    <h3>
+                      Entre ou Cadastre-se <span>para ver seus pedidos</span>
+                    </h3>
+                  </a>
+                </div>
+                <Link href={"#"}>
+                  <CartShopping className="cursor-pointer" />
+                </Link>
+              </DivCircle>
+            </div>
+          </Nav>
+        </form>
+      </header>
+    </ThemeProvider>
   );
 }
