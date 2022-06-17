@@ -1,94 +1,52 @@
-import * as React from "react";
-import stylede from "styled-components";
-import { styled, alpha } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
-// import MenuIcon from "@mui/icons-material/Menu";
-// import SearchIcon from "@mui/icons-material/Search";
+import styled from "styled-components";
+import { UserCircle } from "@styled-icons/heroicons-outline/UserCircle";
 
-const LogoApp = stylede.img`
-  height: 40px;
-  width: 40px;
+//estiizacao na navbar
+export const Nav = styled.nav`
+  background-color: #243b67;
+  display: flex;
+  width: 100%;
+  height: 150px;
+  justify-content: space-between;
 `;
 
-// Componente de busca ao lado direito do AppBar
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
-}));
-// input icon search
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-// input searc
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
+export const Img = styled.img`
+  width: 100px;
+  height: 100px;
+`;
 
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
-}));
+const Input = styled.input`
+  display: flex;
+  width: 300px;
+  height: 40px;
+  border-radius: 5px;
+  outline: none;
+`;
 
-export default function SearchAppBar() {
+export const Icon = styled(UserCircle)`
+  width: 30px;
+  height: 30px;
+  color: #fff;
+`;
+
+export default function NavBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            {/* <MenuIcon /> */}
-          </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-          >
-            <LogoApp src="img/logoE.png" />
-          </Typography>
-          <Search>
-            <SearchIconWrapper>{/* <SearchIcon /> */}</SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
-        </Toolbar>
-      </AppBar>
-    </Box>
+    <div className="w-full h-full">
+      <Nav className="">
+        <a href="#">
+          <Img src="img/logoE.png" />
+        </a>
+        <div className="w-screen flex justify-center items-center">
+          <Input type="text" />
+        </div>
+        <Icon />
+      </Nav>
+      <ul>
+        <li>Cadastre</li>
+        <li>Cadastre</li>
+        <li>Cadastre</li>
+      </ul>
+      ;
+    </div>
   );
 }
