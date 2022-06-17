@@ -48,6 +48,15 @@ export default function NavBar() {
               </DivCircle>
             </div>
           </Nav>
+          <div>
+            <ul>
+              <li>Compra</li>
+              <li>Compra</li>
+              <li>Compra</li>
+              <li>Compra</li>
+              <li>Compra</li>
+            </ul>
+          </div>
         </form>
       </header>
     </ThemeProvider>

@@ -53,8 +53,8 @@ export const Nav = styled.nav`
 
 export const UserCirc = styled(User)`
   color: ${(props) => props.theme.colors.colorSecondary};
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   position: relative;
 `;
 
@@ -78,8 +78,9 @@ export const DivCircle = styled.div`
 
 export const CartShopping = styled(ShoppingCart)`
   color: ${(props) => props.theme.colors.colorSecondary};
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   position: relative;
+  margin-left: 20px;
 `;
 export const ButtonSearch = styled.div``;
