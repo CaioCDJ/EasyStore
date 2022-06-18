@@ -1,94 +1,79 @@
-import * as React from "react";
-import stylede from "styled-components";
-import { styled, alpha } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
-// import MenuIcon from "@mui/icons-material/Menu";
-// import SearchIcon from "@mui/icons-material/Search";
+import {
+  Nav,
+  theme,
+  ButtonSearch,
+  UserCirc,
+  DivCircle,
+  CartShopping,
+  DivUl,
+} from "../styles/navHome";
+import { Search } from "@styled-icons/evil/Search";
+import { ThemeProvider } from "styled-components";
+import Link from "next/link";
 
-const LogoApp = stylede.img`
-  height: 40px;
-  width: 40px;
-`;
-
-// Componente de busca ao lado direito do AppBar
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
-}));
-// input icon search
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-// input searc
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
-}));
-
-export default function SearchAppBar() {
+function NavBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            {/* <MenuIcon /> */}
-          </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-          >
-            <LogoApp src="img/logoE.png" />
-          </Typography>
-          <Search>
-            <SearchIconWrapper>{/* <SearchIcon /> */}</SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
-        </Toolbar>
-      </AppBar>
-    </Box>
+    <ThemeProvider theme={theme}>
+      <header className="w-full h-full">
+        <form>
+          <Nav theme={theme}>
+            <div className="flex justify-center items-center w-full">
+              <a href="#">
+                <img src="img/EasyStore.png" />
+                <p>EasyStore </p>
+              </a>
+              <input
+                type="text"
+                placeholder="Buscar produtos, marcas e muito mais…"
+              />
+              <ButtonSearch>
+                <Search
+                  size={"30px"}
+                  className="bg-#EBEBEB rounded-xl mr-1 z-20 relative"
+                />
+              </ButtonSearch>
+              <DivCircle>
+                <Link href="#">
+                  <span className="rounded-full p-1 border drop-shadow-lg">
+                    <UserCirc theme={theme} />
+                  </span>
+                </Link>
+                <div>
+                  <a href="#">
+                    <h3>
+                      Entre ou Cadastre-se <span>para ver seus pedidos</span>
+                    </h3>
+                  </a>
+                </div>
+                <Link href={"#"}>
+                  <CartShopping className="cursor-pointer" />
+                </Link>
+              </DivCircle>
+            </div>
+          </Nav>
+          <DivUl>
+            <ul>
+              <li>
+                <Link href={"#"}>Categorias ⮯</Link>
+              </li>
+              <li>
+                <Link href={"#"}>Ofertas do dia</Link>
+              </li>
+              <li>
+                <Link href={"#"}>Historico</Link>
+              </li>
+              <li>
+                <Link href={"#"}>Vender</Link>
+              </li>
+              <li>
+                <Link href={"#"}>Contato</Link>
+              </li>
+            </ul>
+          </DivUl>
+        </form>
+      </header>
+    </ThemeProvider>
   );
 }
+
+export default NavBar;
