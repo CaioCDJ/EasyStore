@@ -1,6 +1,7 @@
 import 'reflect-metadata'; 
-import express from 'express';
-import cors from 'cors';
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
 import clientRoutes from './routes/clientRoutes';
 
@@ -13,11 +14,11 @@ const HOSTNAME = process.env.HOSTNAME || 'http://localhost';
 // App Express
 const app = express();
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Endpoint raiz
-app.get('/', (req, res) => {
+app.get('/', (req:any, res:any) => {
 	res.send('Bem-vindo!');
 });
 
@@ -30,11 +31,11 @@ app.use(cors({
 app.use('/api', clientRoutes);
 
 // Rotas inexistentes
-app.use((req, res) => {
+app.use((req:any, res:any) => {
 	res.status(404);
 })
 
 // Inicia o sevidor
 app.listen(PORT, () => {
-	console.log(`Servidor rodando com sucesso ${HOSTNAME}:${PORT}`)
+	console.log(`Servidor rodando com Heheh ${HOSTNAME}:${PORT}`)
 });

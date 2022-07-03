@@ -1,10 +1,25 @@
 export default class Client{
 
-    private _id:number;
-    public name:string;
-    public email: string;
-    public cep:number;
-    public phone:number;
-    public level:number;
-    public xp:number;
+    firstName:string;
+    lastName:string;
+    email: string;
+    cep:number;
+    password:string;
+    address:string;
+    phone:number;
+    level:number;
+    xp:number;
+
+    constructor(client:any){
+      this.firstName = client.First;
+      this.lastName = client.lastName;
+      this.email = client.email;
+      this.cep = +client.cep;
+      this.address = client.address;
+      this.phone = client.phone;
+      this.password = client.password;
+      this.level = 1;
+      this.xp = 0;
+    }
+
 }

@@ -1,48 +1,61 @@
-import express from 'express';
+import expres, {Response,Request} from 'express';
+import Product from '../models/Product.ts'
+const db = require('../repositories/db.ts');
 
 const productRouter = express.Router();
-const {connection} = require('../database/db.ts');
 
-// get by id
-productRouter.post('/product/:id',(req,res)=>{
+// Rota fechada
+productRouter.post('/product/:id',(req:Request,res:Response):any=>{
+  
+  if(req.body || req.params.id){
+    res.status(400).send();
+  }
+  
+  const idStore:number = +req.params.id;
+  const product = new Product(req.body)
 
-    let id:number = +req.params.id;
-    
+  const query = `INSERT INTO tb_product (nm_product,vl_product, qt_product, ds_product,fk_cd_store) 
+	      	          VALUES (?,?,?,?,?);`;
 
-    let query = 'SELECT * FROM tb_product WHRE cd_product = ?';
+  const params = [product.name,
+                  product.value,
+                  product.qt,
+                  product.ds,
+                  idStore];
 
-    connection.execute(query,[id],(error:String,results:String)=>{
-        
-        if(results.length < -1){
-            res.status(404).send('Produto não encontrado');
-        }
-        else
-            res.send(results);
-    });
+  db.exec(query,params).then((resp:any)=>{ 
+    res.status(200).send();
+  }).catch((e:any)=>{
+      res.status(404).send();
+  })
 
 });
 
-// get by categorie
-productRouter.post('/product/categorie/:categorie',(req,res)=>{
+// productRouter.put('/product/:id');
 
-    let nmCategorie:String = req.params.categorie;
+productRouter.delete('/product/',(req:Request, res:Response):any =>{
+  /*
+   *{
+      "idStore":??,
+      "idProduct":??
+    }
+  * */
+  const [idStore,idProduct] = req.body;
 
-    let query = `SELECT * from tb_product as p 
-	                JOIN tb_categorie as c
-		                WHERE c.nm_categorie = ? and 
-			                c.cd_categorie = p.fk_cd_categorie;`;
-    
-    connection.execute(query,[nmCategorie], (error:String, results:String)=>{
-        
-        if(results.length < -1 ){
-            res.status(404);
-        } else {
-            res.send(results);
-        }
-    })
+
+  const query = `DELETE FROM tb_product 
+                  WHERE cd_product = ?
+                    AND fk_cd_store`;
+
+  const params = [idProduct,idStore];
+
+  db.exec(query,params)
+  .then((resp:any)=>{
+    res.send('Produto excluido');
+  })
+  .catch((e:any)=>{ 
+    res.status(404).send()})
 });
-
-// search product ??
 
 
 export default productRouter;
